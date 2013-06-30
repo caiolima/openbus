@@ -1,3 +1,21 @@
+/*This file is part of OpenBus project.
+*
+*OpenBus is free software: you can redistribute it and/or modify
+*it under the terms of the GNU General Public License as published by
+*the Free Software Foundation, either version 3 of the License, or
+*(at your option) any later version.
+*
+*OpenBus is distributed in the hope that it will be useful,
+*but WITHOUT ANY WARRANTY; without even the implied warranty of
+*MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+*GNU General Public License for more details.
+*
+*You should have received a copy of the GNU General Public License
+*along with OpenBus. If not, see <http://www.gnu.org/licenses/>.
+*
+* Author: Caio Lima
+* Date: 30 - 06 - 2013
+*/
 package com.dot.me.model.bd;
 
 import android.content.Context;
@@ -12,53 +30,27 @@ public class DataBase {
 			TB_MARCADOR = "marcador", TB_PALAVRA_CHAVE = "palavra_chave",
 			TB_PALAVRA_CHAVE_MARCADOR = "palavra_chave_marcador",
 			TB_MENSAGEM = "mensagem", TB_SEARCH = "search_tb",
-			TB_USER = "user_table", TB_BLACKLIST = "blacklist",
-			TB_FACEBOOK = "tb_facebook",
-			TB_FACEBOOK_GROUPS = "facebook_groups",
+			TB_USER = "user_table", 
 			TB_COLUMNS_CONFIG = "collumn_config", TB_DRAFTS = "drafts",
-			TB_LOCATION_SELECTED="location_selected",
 
 			TWITTER_ID = "idTwitter", TWITTER_NAME = "name",
 			TWITTER_TOKEN = "token", TWITTER_TOKEN_SECRET = "tokenSecret",
 			TWITTER_PROF_IMF = "profile_img",
-
-			FACEBOOK_ID = "idFacebook", FACEBOOK_TOKEN = "access_token",
-			FACEBOOK_PROFILE_IMG = "image_url",
-			FACEBOOK_EXPIRES = "expires_at", FACEBOOK_NAME = "name",
-
-			MARCADOR_ID = "idMarcador", MARCADOR_NOME = "nome",
-			MARCADOR_ENABLED = "visivel",
 
 			MENSAGEM_ID = "idMensagem", MENSAGEM_TEXTO = "texto",
 			MENSAGEM_USER = "userName", MENSAGEM_DATE = "createdAt",
 			MENSAGEM_IMAGE_URL = "imgURL", MENSAGEM_TIPO = "tipoMensagem",
 			MENSAGEM_ID_USER = "id_from", MENSAGEM_ADD_CONTENT = "add_content",
 
-			SEARCH_ID = "idSearch", SEARCH_CONTENT = "content_word",
-			SEARCH_CREATED_AT = "created_at",
-
-			PALAVRA_CHAVE_ID = "idPalavraChave",
-			PALAVRA_CHAVE_CONTEUDO = "conteudo",
-
 			USER_SYS_ID = "id", USER_ID = "idUser", USER_NAME = "name",
 			USER_URL = "url_img", USER_ABOUT = "about", USER_NICK = "nick",
 			USER_NUM_FOLLOWERS = "followers", USER_NUM_FOLLOWING = "following",
 			USER_TYPE = "tipo_usuario",
 
-			FACEBOOK_GROUPS_ID = "idGroup",
-			FACEBOOK_GROUPS_ULR_IMAGE = "url_image",
-			FACEBOOK_GROUPS_NAME = "name",
-			FACEBOOK_GROUPS_DESCRIPTION = "facebook_groups_description",
-
-			BLACKLIST_ID_PALAVRA = "idPalavra",
-
 			COLUMNS_CONFIG_POS = "pos", COLUMNS_CONFIG_TYPE = "c_type",
 			COLUMNS_CONFIG_PROPRITIES = "c_propreties",
 
-			DRAFTS_ID = "drafts_id", DRAFTS_TEXT = "drafts_text",
-			
-			LOCATION_SELECTED_WOEID="woeid",
-			LOCATION_SELECT_NAME="name";
+			DRAFTS_ID = "drafts_id", DRAFTS_TEXT = "drafts_text";
 
 	private static DataBase singleton;
 	private final String[] CREATE_SQL = new String[] {
@@ -68,10 +60,6 @@ public class DataBase {
 					+ COLUMNS_CONFIG_TYPE + " text not null, " + ""
 					+ COLUMNS_CONFIG_PROPRITIES + " text not null);",
 
-			"CREATE TABLE IF NOT EXISTS " + TB_SEARCH + "(" + SEARCH_CONTENT
-					+ " text primary key, " + "" + SEARCH_CREATED_AT
-					+ " long not null);",
-
 			"CREATE TABLE IF NOT EXISTS " + TB_TWITTER + "(" + TWITTER_ID
 					+ " long primary key," + "" + TWITTER_TOKEN
 					+ " text not null," + "" + TWITTER_TOKEN_SECRET
@@ -79,34 +67,8 @@ public class DataBase {
 					+ " text not null," + "" + TWITTER_NAME
 					+ " text not null);",
 
-			"CREATE TABLE IF NOT EXISTS " + TB_FACEBOOK_GROUPS + "("
-					+ FACEBOOK_GROUPS_ID + " text primary key," + ""
-					+ FACEBOOK_GROUPS_NAME + " text not null," + ""
-					+ FACEBOOK_GROUPS_DESCRIPTION + " text not null," + ""
-					+ FACEBOOK_GROUPS_ULR_IMAGE + " text not null);",
-
-			"CREATE TABLE IF NOT EXISTS " + TB_FACEBOOK + "(" + FACEBOOK_ID
-					+ " long primary key," + "" + FACEBOOK_PROFILE_IMG
-					+ " text not null," + "" + FACEBOOK_TOKEN
-					+ " text not null," + "" + FACEBOOK_EXPIRES
-					+ " long not null," + "" + FACEBOOK_NAME
-					+ " text not null);",
-
-			"CREATE TABLE IF NOT EXISTS " + TB_MARCADOR + "(" + MARCADOR_ID
-					+ " integer primary key autoincrement," + ""
-					+ MARCADOR_NOME + " text not null," + "" + MARCADOR_ENABLED
-					+ " integer not null);",
-
-			"CREATE TABLE IF NOT EXISTS " + TB_PALAVRA_CHAVE + "("
-					+ PALAVRA_CHAVE_ID + " integer primary key autoincrement,"
-					+ "" + PALAVRA_CHAVE_CONTEUDO + " text not null);",
-
 			"CREATE TABLE IF NOT EXISTS " + TB_DRAFTS + "(" + DRAFTS_ID
 					+ " text not null," + "" + DRAFTS_TEXT + " text not null);",
-
-			"CREATE TABLE IF NOT EXISTS " + TB_PALAVRA_CHAVE_MARCADOR + "("
-					+ PALAVRA_CHAVE_ID + " long not null," + "" + MARCADOR_ID
-					+ " long not null);",
 
 			"CREATE TABLE IF NOT EXISTS " + TB_MENSAGEM + "(" + MENSAGEM_ID
 					+ " text," + "" + MENSAGEM_TEXTO + " text not null," + ""
@@ -122,21 +84,13 @@ public class DataBase {
 					+ USER_NAME + " text not null," + "" + USER_URL
 					+ " text not null," + "" + USER_NUM_FOLLOWERS + " int,"
 					+ "" + USER_NUM_FOLLOWING + " int," + "" + USER_TYPE
-					+ " int not null," + "" + USER_NICK + " text);",
-
-			"CREATE TABLE IF NOT EXISTS " + TB_BLACKLIST + "("
-					+ BLACKLIST_ID_PALAVRA + " integer primary key)",
-			
-				"CREATE TABLE IF NOT EXISTS " + TB_LOCATION_SELECTED + "("
-						+ LOCATION_SELECTED_WOEID + " int not null," + "" + LOCATION_SELECT_NAME
-						+ " text not null);",
-
+					+ " int not null," + "" + USER_NICK + " text);"
 	};
 	private SQLiteDatabase db;
 	private SQLiteHelper dbHelper;
 
 	public DataBase(Context c) {
-		dbHelper = new SQLiteHelper(c, "TwitteMarkup", 18, CREATE_SQL);
+		dbHelper = new SQLiteHelper(c, "OpenBus", 18, CREATE_SQL);
 		setDB(dbHelper.getWritableDatabase());
 	}
 

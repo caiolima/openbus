@@ -1,3 +1,21 @@
+/*This file is part of OpenBus project.
+*
+*OpenBus is free software: you can redistribute it and/or modify
+*it under the terms of the GNU General Public License as published by
+*the Free Software Foundation, either version 3 of the License, or
+*(at your option) any later version.
+*
+*OpenBus is distributed in the hope that it will be useful,
+*but WITHOUT ANY WARRANTY; without even the implied warranty of
+*MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+*GNU General Public License for more details.
+*
+*You should have received a copy of the GNU General Public License
+*along with OpenBus. If not, see <http://www.gnu.org/licenses/>.
+*
+* Author: Caio Lima
+* Date: 30 - 06 - 2013
+*/
 package com.dot.me.model.bd;
 
 import java.net.MalformedURLException;
@@ -19,7 +37,6 @@ public class Facade {
 	private static Facade singleton;
 	private TwitterBD twitterBD;
 	private MensagemBD mensagemBD;
-	private TwitterSearchBD twitterSearchBD;
 	private CollumnConfigDao configDao;
 	private UserDB userBD;
 	private DraftBD draftBD;
@@ -35,7 +52,6 @@ public class Facade {
 
 		twitterBD = new TwitterBD(ctx);
 		mensagemBD = new MensagemBD(ctx);
-		twitterSearchBD = new TwitterSearchBD(ctx);
 		configDao = new CollumnConfigDao(ctx);
 		userBD = new UserDB(ctx);
 		draftBD = new DraftBD(ctx);
@@ -55,7 +71,6 @@ public class Facade {
 		twitterBD.delete();
 		mensagemBD.deleteAll(Mensagem.TIPO_STATUS);
 		mensagemBD.deleteAll(Mensagem.TIPO_TWEET_SEARCH);
-		twitterSearchBD.deleteAll();
 		TwitterUtils.logoutTwitter();
 	}
 
@@ -107,27 +122,6 @@ public class Facade {
 
 	public Vector<Mensagem> getMensagemOf(int type) {
 		return mensagemBD.getMensagemOf(type);
-	}
-
-	public int insert(String search) {
-
-		return twitterSearchBD.insert(search.toLowerCase().trim());
-	}
-
-	public void deleteSearch(String search) {
-		twitterSearchBD.delete(search);
-	}
-
-	public void deleteAllSearch() {
-		mensagemBD.deleteAllSearch();
-	}
-
-	public Vector<String> getAllSearches() {
-		return twitterSearchBD.getAll();
-	}
-
-	public boolean wasSearchAdded(String search) {
-		return twitterSearchBD.wasAdded(search);
 	}
 
 	public void deleteMensagem(final String id, final int type) {

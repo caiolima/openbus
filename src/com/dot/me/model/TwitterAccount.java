@@ -1,5 +1,6 @@
 package com.dot.me.model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import twitter4j.Twitter;
@@ -17,8 +18,10 @@ public class TwitterAccount extends Account{
 	public URL processProfileImage() {
 		Twitter twitter=TwitterUtils.getTwitter(new AccessToken(token, tokenSecret));
 		try {
-			return twitter.verifyCredentials().getProfileImageURL();
+			return new URL(twitter.verifyCredentials().getOriginalProfileImageURL());
 		} catch (TwitterException e) {
+			return null;
+		} catch (MalformedURLException e) {
 			return null;
 		}
 	}

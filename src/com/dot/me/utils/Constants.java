@@ -4,8 +4,8 @@ public class Constants {
 
 	public static final String FACEBOOK_APP_ID="206851786009863";
 	
-	public static final String CONSUMER_KEY = "evIeEiqjofChzHErIlpEbA";
-	public static final String CONSUMER_SECRET= "2BibC7Q851GwlqDFDD4RO7Z8Tjbl6SvroinrWnPaiI";
+	public static final String CONSUMER_KEY = "UvufnIkLtJQTVij09qBlg";
+	public static final String CONSUMER_SECRET= "NUqUGrKI0Zh7WXob2XF1Z2s6MQxEKCzayJ9XZ8YpM";
 	
 	public static final String REQUEST_URL = "http://api.twitter.com/oauth/request_token";
 	public static final String ACCESS_URL = "http://api.twitter.com/oauth/access_token";

@@ -13,15 +13,6 @@
         android:layout_height="5dp"
         android:max="100" />
 
-    
-    <com.google.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        ads:adSize="BANNER"
-        android:visibility="gone"
-        ads:adUnitId="@string/admob_id" />
-
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

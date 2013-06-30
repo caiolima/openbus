@@ -240,26 +240,26 @@ public class AddSocialAccount extends Activity {
 			commonHttpOAuthConsumer = new CommonsHttpOAuthConsumer(
 					Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
 			authProvider = new DefaultOAuthProvider(
-					"http://twitter.com/oauth/request_token",
-					"http://twitter.com/oauth/access_token",
-					"http://twitter.com/oauth/authorize");
+					"https://api.twitter.com/oauth/request_token",
+					"https://api.twitter.com/oauth/access_token",
+					"https://api.twitter.com/oauth/authorize");
 			try {
 				String oAuthURL = authProvider.retrieveRequestToken(
 						commonHttpOAuthConsumer, "twitter-client://back");
-				/*
-				 * Intent intent = new Intent(Intent.ACTION_VIEW,
-				 * Uri.parse(oAuthURL));
-				 * intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-				 * Intent.FLAG_ACTIVITY_NEW_TASK); startActivity(intent);
-				 */
-				Intent intent = new Intent(AddSocialAccount.this,
-						TwitterLoginActivity.class);
-				Bundle b = new Bundle();
-				b.putString("url", oAuthURL);
-
-				intent.putExtras(b);
-
-				startActivity(intent);
+				
+				  Intent intent = new Intent(Intent.ACTION_VIEW,
+				  Uri.parse(oAuthURL));
+				  intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+				  Intent.FLAG_ACTIVITY_NEW_TASK); startActivity(intent);
+				 
+//				Intent intent = new Intent(AddSocialAccount.this,
+//						TwitterLoginActivity.class);
+//				Bundle b = new Bundle();
+//				b.putString("url", oAuthURL);
+//
+//				intent.putExtras(b);
+//
+//				startActivity(intent);
 
 			} catch (OAuthMessageSignerException e) {
 				e.printStackTrace();

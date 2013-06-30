@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
-import twitter4j.Tweet;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
@@ -76,63 +75,63 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 			currentpage = 1;
 
 		flagNextPage = false;
-		q.setPage(currentpage);
-		try {
-			QueryResult result = twitter.search(q);
-			final Vector<Mensagem> mensagens = new Vector<Mensagem>();
-
-			for (Tweet tweet : result.getTweets()) {
-				try {
-					Mensagem m = Mensagem.createFromTweet(tweet);
-
-					Facade facade = Facade.getInstance(ctx);
-
-					if (!facade.exsistsStatus(m.getIdMensagem(), m.getTipo())) {
-
-						facade.insert(m);
-						mensagens.add(m);
-
-					}
-				} catch (Exception e) {
-					
-				}
-
-			}
-
-			if (h == null)
-				return;
-
-			h.post(new Runnable() {
-
-				@Override
-				public void run() {
-
-					if (currentpage == 1) {
-						((PullToRefreshListView) listView).onRefreshComplete();
-						if (!mensagens.isEmpty()) {
-							adapter.clear();
-							for (Mensagem m : last)
-								facade.deleteMensagem(m.getIdMensagem(),
-										m.getTipo());
-
-						}
-					}
-
-					for (Mensagem m : mensagens)
-						adapter.addItem(m);
-
-					if (currentpage > 1) {
-						notifyNextPageFinish();
-
-					}
-				}
-			});
-
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}catch (Exception e) {
-
-		}
+//		q.setPage(currentpage);
+//		try {
+//			QueryResult result = twitter.search(q);
+//			final Vector<Mensagem> mensagens = new Vector<Mensagem>();
+//
+//			for (Tweet tweet : result.getTweets()) {
+//				try {
+//					Mensagem m = Mensagem.createFromTweet(tweet);
+//
+//					Facade facade = Facade.getInstance(ctx);
+//
+//					if (!facade.exsistsStatus(m.getIdMensagem(), m.getTipo())) {
+//
+//						facade.insert(m);
+//						mensagens.add(m);
+//
+//					}
+//				} catch (Exception e) {
+//					
+//				}
+//
+//			}
+//
+//			if (h == null)
+//				return;
+//
+//			h.post(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//
+//					if (currentpage == 1) {
+//						((PullToRefreshListView) listView).onRefreshComplete();
+//						if (!mensagens.isEmpty()) {
+//							adapter.clear();
+//							for (Mensagem m : last)
+//								facade.deleteMensagem(m.getIdMensagem(),
+//										m.getTipo());
+//
+//						}
+//					}
+//
+//					for (Mensagem m : mensagens)
+//						adapter.addItem(m);
+//
+//					if (currentpage > 1) {
+//						notifyNextPageFinish();
+//
+//					}
+//				}
+//			});
+//
+//		} catch (TwitterException e) {
+//			e.printStackTrace();
+//		}catch (Exception e) {
+//
+//		}
 
 	}
 
@@ -296,26 +295,26 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 				currentpage = 1;
 
 			flagNextPage = false;
-			q.setPage(currentpage);
-			try {
-				QueryResult result = twitter.search(q);
-
-				for (Tweet tweet : result.getTweets()) {
-					Mensagem m = Mensagem.createFromTweet(tweet);
-
-					mensagens.add(m);
-
-				}
-
-			} catch (TwitterException e) {
-				e.printStackTrace();
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			q.setPage(currentpage);
+//			try {
+//				QueryResult result = twitter.search(q);
+//
+//				for (Tweet tweet : result.getTweets()) {
+//					Mensagem m = Mensagem.createFromTweet(tweet);
+//
+//					mensagens.add(m);
+//
+//				}
+//
+//			} catch (TwitterException e) {
+//				e.printStackTrace();
+//			} catch (MalformedURLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 			return null;
 		}

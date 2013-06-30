@@ -14,7 +14,6 @@ import twitter4j.DirectMessage;
 import twitter4j.HashtagEntity;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
-import twitter4j.Tweet;
 import twitter4j.URLEntity;
 import twitter4j.UserMentionEntity;
 
@@ -99,7 +98,7 @@ public class Mensagem implements Comparable<Mensagem> {
 			mensagem.idMensagem = Long.toString(dm.getId());
 			mensagem.nome_usuario = dm.getSender().getName();
 			mensagem.mensagem = dm.getText();
-			mensagem.imagePath = dm.getSender().getProfileImageURL();
+//			mensagem.imagePath = dm.getSender().getProfileImageURL();
 			mensagem.data = dm.getCreatedAt();
 			mensagem.idUser = dm.getSender().getId();
 			mensagem.tipo = TIPO_STATUS;
@@ -141,13 +140,15 @@ public class Mensagem implements Comparable<Mensagem> {
 			mensagem.idMensagem = Long.toString(s.getId());
 			mensagem.nome_usuario = s.getUser().getName();
 			mensagem.mensagem = s.getText();
-			mensagem.imagePath = s.getUser().getProfileImageURL();
+			mensagem.imagePath = new URL(s.getUser().getOriginalProfileImageURL());
 			mensagem.data = s.getCreatedAt();
 			mensagem.idUser = s.getUser().getId();
 			mensagem.tipo = TIPO_STATUS;
 
 			return mensagem;
 		} catch (JSONException e) {
+			return null;
+		} catch (MalformedURLException e) {
 			return null;
 		}
 	}
@@ -179,62 +180,8 @@ public class Mensagem implements Comparable<Mensagem> {
 		json.put("inReplyId", s.getInReplyToStatusId());
 		return json;
 
-	}
-
-	public static Mensagem createFromTweet(Tweet t)
-			throws MalformedURLException, JSONException {
-		Mensagem m = new Mensagem();
-
-		try {
-			JSONObject json = new JSONObject();
-			String text = t.getText();
-			try {
-				for (HashtagEntity h : t.getHashtagEntities()) {
-
-					String subText = "<a href=\"twitter_search://do_search?search="
-							+ h.getText() + "\">#" + h.getText() + "</a>";
-					text = text.replace("#" + h.getText(), subText);
-
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-			try {
-				for (UserMentionEntity u : t.getUserMentionEntities()) {
-
-					String subText = "<a href=\"twitter_search_user://find_user?username="
-							+ u.getScreenName()
-							+ "\">@"
-							+ u.getScreenName()
-							+ "</a>";
-					text = text.replace("@" + u.getScreenName(), subText);
-
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			json.put("inReplyId", -1);
-			json.put("htmlText", text);
-			m.setAddtions(json);
-			m.data = t.getCreatedAt();
-			m.imagePath = new URL(t.getProfileImageUrl());
-			m.idMensagem = Long.toString(t.getId());
-			m.mensagem = t.getText();
-			m.nome_usuario = t.getFromUser();
-			m.idUser = t.getFromUserId();
-			m.tipo = TIPO_TWEET_SEARCH;
-
-			m.setAction(OpenTwitterStatusAction.getInstance());
-
-			return m;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
+	}	
 	
-
 	@Override
 	public int compareTo(Mensagem another) {
 		return another.getUpdatedTime().compareTo(getUpdatedTime());

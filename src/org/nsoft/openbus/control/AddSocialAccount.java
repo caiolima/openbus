@@ -20,6 +20,13 @@
 package org.nsoft.openbus.control;
 
 import org.nsoft.openbus.R;
+import org.nsoft.openbus.assynctask.TwitterImageDownloadTask;
+import org.nsoft.openbus.model.Account;
+import org.nsoft.openbus.model.TwitterAccount;
+import org.nsoft.openbus.model.bd.DataBase;
+import org.nsoft.openbus.model.bd.Facade;
+import org.nsoft.openbus.utils.Constants;
+import org.nsoft.openbus.utils.TwitterUtils;
 
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.basic.DefaultOAuthProvider;
@@ -30,13 +37,6 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import twitter4j.auth.AccessToken;
 
-import com.dot.me.assynctask.TwitterImageDownloadTask;
-import com.dot.me.model.Account;
-import com.dot.me.model.TwitterAccount;
-import com.dot.me.model.bd.DataBase;
-import com.dot.me.model.bd.Facade;
-import com.dot.me.utils.Constants;
-import com.dot.me.utils.TwitterUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -107,7 +107,6 @@ public class AddSocialAccount extends Activity {
 		running = true;
 		DataBase.start(this);
 
-		
 		twitterPane = (LinearLayout) findViewById(R.id.twitter_pane);
 		twitterImage = (ImageView) findViewById(R.id.twitter_img);
 		
@@ -149,27 +148,28 @@ public class AddSocialAccount extends Activity {
 
 			@Override
 			public void onClick(View v) {
+		
+//				SharedPreferences settings = getSharedPreferences(
+//						Constants.PREFS_NAME, 0);
+//				boolean flagHelp = settings.getBoolean(Constants.HELP_SHOWED,
+//						false);
+//				Intent intent=null;
+//				if (!flagHelp) {
+//					intent = new Intent(AddSocialAccount.this,
+//							HelpActivity.class);
+//				} 
+//				
+//				startActivity(intent);
+//				finish();
 				
-
-				SharedPreferences settings = getSharedPreferences(
-						Constants.PREFS_NAME, 0);
-				boolean flagHelp = settings.getBoolean(Constants.HELP_SHOWED,
-						false);
-				Intent intent=null;
-				if (!flagHelp) {
-					
-					intent = new Intent(AddSocialAccount.this,
-							HelpActivity.class);
-					
-					
-				} 
+				Intent intent = new Intent(AddSocialAccount.this,
+							SearchLineActivity.class);
+				
 				
 				startActivity(intent);
 				finish();
 				
 			}
-			
-
 		});
 
 		
@@ -309,7 +309,7 @@ public class AddSocialAccount extends Activity {
 	class GetBasicInformationsTask extends AsyncTask<Uri, Void, Void> {
 
 		private ProgressDialog progressDialog;
-		private TwitterAccount t;
+		private TwitterAccount twitterAcc;
 
 		@Override
 		protected void onPreExecute() {
@@ -346,12 +346,12 @@ public class AddSocialAccount extends Activity {
 				TwitterUtils.getTwitter().setOAuthAccessToken(accessToken);
 				long id = TwitterUtils.getTwitter().getId();
 
-				t = new TwitterAccount();
-				t.setId(id);
-				t.setToken(token);
-				t.setTokenSecret(tokenSecret);
-				t.setProfileImage(t.processProfileImage());
-				t.setName(TwitterUtils.getTwitter().getScreenName());
+				twitterAcc = new TwitterAccount();
+				twitterAcc.setId(id);
+				twitterAcc.setToken(token);
+				twitterAcc.setTokenSecret(tokenSecret);
+				twitterAcc.setProfileImage(twitterAcc.processProfileImage());
+				twitterAcc.setName(TwitterUtils.getTwitter().getScreenName());
 				// t.setNickname(TwitterUtils.getTwitter().verifyCredentials().getName());
 
 			} catch (Exception e) {
@@ -379,7 +379,7 @@ public class AddSocialAccount extends Activity {
 			Facade.destroy();
 			DataBase.start(AddSocialAccount.this);
 
-			Facade.getInstance(AddSocialAccount.this).insert(t);			
+			Facade.getInstance(AddSocialAccount.this).insert(twitterAcc);			
 
 			updateLayout();
 			

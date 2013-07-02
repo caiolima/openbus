@@ -157,13 +157,15 @@ containing a value of this type.
         public static final int tweet_view_pressed=0x7f020043;
     }
     public static final class id {
-        public static final int action_settings=0x7f09003c;
-        public static final int adView=0x7f090038;
-        public static final int bt_like=0x7f090030;
-        public static final int bt_not_like=0x7f09002f;
+        public static final int action_settings=0x7f090042;
+        public static final int adView=0x7f09003e;
+        public static final int bt_like=0x7f090036;
+        public static final int bt_not_like=0x7f090035;
         public static final int bt_ok=0x7f090003;
+        public static final int bt_search=0x7f09002f;
         public static final int imageView1=0x7f090022;
         public static final int imageView2=0x7f090025;
+        public static final int image_loading=0x7f090032;
         public static final int img_preview_source=0x7f090018;
         public static final int img_thumbnail=0x7f09001c;
         public static final int lbl_qtd_comments=0x7f090026;
@@ -175,18 +177,20 @@ containing a value of this type.
         public static final int linearLayout4=0x7f09000a;
         public static final int linearLayout5=0x7f09000c;
         public static final int linearLayout6=0x7f090002;
-        public static final int load_bar=0x7f09003a;
+        public static final int load_bar=0x7f090040;
         public static final int load_progress_loading=0x7f090028;
+        public static final int lst_lines=0x7f090030;
         public static final int lt_comments=0x7f090024;
+        public static final int lt_image_loading=0x7f090031;
         public static final int lt_image_preview=0x7f090017;
         public static final int lt_likes=0x7f090021;
         public static final int lt_link_details=0x7f09001b;
         public static final int lt_loading=0x7f090027;
-        public static final int lt_main_web=0x7f090039;
+        public static final int lt_main_web=0x7f09003f;
         public static final int lt_status=0x7f090020;
         public static final int lt_twiite_caption=0x7f090019;
         public static final int lt_vertical_line=0x7f09001d;
-        public static final int message_send_img_profile=0x7f090033;
+        public static final int message_send_img_profile=0x7f090039;
         public static final int profile_img=0x7f090012;
         public static final int pull_to_refresh_header=0x7f090029;
         public static final int pull_to_refresh_image=0x7f09002b;
@@ -194,18 +198,18 @@ containing a value of this type.
         public static final int pull_to_refresh_text=0x7f09002c;
         public static final int pull_to_refresh_updated_at=0x7f09002d;
         public static final int screen_name=0x7f090013;
-        public static final int send_message_lbl_current_user=0x7f090034;
-        public static final int send_message_lbl_type_account=0x7f090035;
+        public static final int send_message_lbl_current_user=0x7f09003a;
+        public static final int send_message_lbl_type_account=0x7f09003b;
         public static final int singin_bt_twitter=0x7f090004;
         public static final int textView1=0x7f090001;
         public static final int textView2=0x7f090009;
         public static final int text_container=0x7f090010;
         public static final int time=0x7f090014;
-        public static final int tweet_bt_send=0x7f090031;
-        public static final int tweet_image_to_send=0x7f090037;
-        public static final int tweet_lt_image_tosend=0x7f090036;
+        public static final int tweet_bt_send=0x7f090037;
+        public static final int tweet_image_to_send=0x7f09003d;
+        public static final int tweet_lt_image_tosend=0x7f09003c;
         public static final int tweet_row_layout=0x7f090011;
-        public static final int tweet_txt_text=0x7f090032;
+        public static final int tweet_txt_text=0x7f090038;
         public static final int twitte=0x7f090016;
         public static final int twitte_row_view=0x7f09000f;
         public static final int twitter_img=0x7f09000b;
@@ -215,9 +219,11 @@ containing a value of this type.
         public static final int twitter_pane_a=0x7f090007;
         public static final int txt_link_datails=0x7f09001e;
         public static final int txt_link_detais_extra=0x7f09001f;
-        public static final int txt_tuto=0x7f09002e;
+        public static final int txt_search=0x7f09002e;
+        public static final int txt_tuto=0x7f090034;
         public static final int txt_tweet_caption=0x7f09001a;
-        public static final int web_view=0x7f09003b;
+        public static final int txt_value=0x7f090033;
+        public static final int web_view=0x7f090041;
     }
     public static final class layout {
         public static final int account_manager=0x7f030000;
@@ -225,10 +231,12 @@ containing a value of this type.
         public static final int feed_row=0x7f030002;
         public static final int loading=0x7f030003;
         public static final int pull_to_refresh_header=0x7f030004;
-        public static final int tutorial=0x7f030005;
-        public static final int tweet=0x7f030006;
-        public static final int twitte_row=0x7f030007;
-        public static final int twitter_login_web=0x7f030008;
+        public static final int search_line=0x7f030005;
+        public static final int trend_item=0x7f030006;
+        public static final int tutorial=0x7f030007;
+        public static final int tweet=0x7f030008;
+        public static final int twitte_row=0x7f030009;
+        public static final int twitter_login_web=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -389,6 +397,7 @@ containing a value of this type.
         public static final int search=0x7f060087;
         public static final int searching=0x7f06004e;
         public static final int seconds_ago=0x7f060098;
+        public static final int select_line=0x7f0600ba;
         public static final int send=0x7f06006a;
         public static final int sending_tweet=0x7f06003a;
         public static final int shared=0x7f0600a9;
@@ -397,9 +406,9 @@ containing a value of this type.
         public static final int text_message=0x7f06002c;
         public static final int trend_topics=0x7f060088;
         public static final int trends=0x7f060089;
-        public static final int tuto_black_list=0x7f0600bc;
-        public static final int tuto_intro=0x7f0600ba;
-        public static final int tuto_labels=0x7f0600bb;
+        public static final int tuto_black_list=0x7f0600be;
+        public static final int tuto_intro=0x7f0600bc;
+        public static final int tuto_labels=0x7f0600bd;
         public static final int tweets=0x7f06004a;
         public static final int twitte_button=0x7f060009;
         public static final int twitte_save=0x7f06000a;
@@ -407,6 +416,7 @@ containing a value of this type.
         public static final int twitter_connect_fail=0x7f060018;
         public static final int twitter_connecting=0x7f060017;
         public static final int twitter_used=0x7f06001c;
+        public static final int type_line=0x7f0600bb;
         public static final int type_word=0x7f060059;
         public static final int type_word_adivice=0x7f06005a;
         public static final int unable_update=0x7f06003d;

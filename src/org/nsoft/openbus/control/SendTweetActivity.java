@@ -22,6 +22,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.nsoft.openbus.R;
+import org.nsoft.openbus.action.ISendAction;
+import org.nsoft.openbus.assynctask.TwitterImageDownloadTask;
+import org.nsoft.openbus.model.Account;
+import org.nsoft.openbus.model.Draft;
+import org.nsoft.openbus.model.bd.Facade;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -38,11 +43,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dot.me.assynctask.TwitterImageDownloadTask;
-import com.dot.me.message.action.ISendAction;
-import com.dot.me.model.Account;
-import com.dot.me.model.Draft;
-import com.dot.me.model.bd.Facade;
 
 public class SendTweetActivity extends Activity{
 

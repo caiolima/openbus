@@ -19,7 +19,7 @@
 package org.nsoft.openbus.control;
 
 import org.nsoft.openbus.R;
-import com.dot.me.utils.Constants;
+import org.nsoft.openbus.utils.Constants;
 
 import android.app.Activity;
 import android.content.Intent;

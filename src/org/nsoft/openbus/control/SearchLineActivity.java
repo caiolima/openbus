@@ -9,6 +9,8 @@ import org.nsoft.openbus.model.bd.Facade;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +44,28 @@ public class SearchLineActivity extends Activity{
 				R.id.txt_value, allLines);
 		
 		lst_lines.setAdapter(adapter);
+		lst_lines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> aAdapter, View aView, int aPosition,
+					long arg3) {
+				
+				
+				LinhaOnibus aLine = adapter.getItem(aPosition);
+				Bundle params=new Bundle();
+				
+				params.putString("hash_code", aLine.getHash());
+				Intent aIntent=new Intent(SearchLineActivity.this, MapActivity.class);
+				
+				aIntent.putExtras(params);
+				
+				startActivity(aIntent);
+				
+				
+				
+			}
+		
+		});
 		
 	}
 

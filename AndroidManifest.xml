@@ -87,6 +87,7 @@
 
         <activity android:name=".control.MapActivity" >
         </activity>
+        <activity android:name="org.five.openbus.reports.tests.ReportTestsActivity"></activity>
     </application>
 
 </manifest>

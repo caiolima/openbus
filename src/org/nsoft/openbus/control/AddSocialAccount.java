@@ -19,6 +19,7 @@
 
 package org.nsoft.openbus.control;
 
+import org.five.openbus.reports.tests.ReportTestsActivity;
 import org.nsoft.openbus.R;
 import org.nsoft.openbus.assynctask.TwitterImageDownloadTask;
 import org.nsoft.openbus.model.Account;
@@ -163,7 +164,7 @@ public class AddSocialAccount extends Activity {
 //				finish();
 				
 				Intent intent = new Intent(AddSocialAccount.this,
-							SearchLineActivity.class);
+							ReportTestsActivity.class);
 				
 				
 				startActivity(intent);

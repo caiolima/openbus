@@ -14,6 +14,8 @@ public class MapActivity extends FragmentActivity{
 		
 		this.setContentView(R.layout.map_view);
 		
+		
+		
 	}
 
 	

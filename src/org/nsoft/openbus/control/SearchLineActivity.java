@@ -61,8 +61,6 @@ public class SearchLineActivity extends Activity{
 				
 				startActivity(aIntent);
 				
-				
-				
 			}
 		
 		});

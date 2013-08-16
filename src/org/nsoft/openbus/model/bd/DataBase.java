@@ -27,34 +27,45 @@ public class DataBase {
 	private boolean isExecuting;
 	// classe para o banco de Dados
 	public static final String TB_TWITTER = "twitter",
-			TB_MENSAGEM = "mensagem", 
+			TB_MESSAGE = "message", 
 			TB_USER = "user_table", 
 			TB_COLUMNS_CONFIG = "collumn_config", TB_DRAFTS = "drafts",
-			TB_LINHAS="linhas_onibus",
+			TB_LINES = "line_bus", TB_REPORT = "report",
 
+			REPORT_LATITUDE = "latitude", REPORT_LONGITUDE = "longitude",
+			REPORT_LINE_EXPECTED = "line_expected",
+			REPORT_TYPE_REPORT = "type_report", REPORT_HOUR = "hour",
+			REPORT_ID = "id_report",
+			
 			TWITTER_ID = "idTwitter", TWITTER_NAME = "name",
 			TWITTER_TOKEN = "token", TWITTER_TOKEN_SECRET = "tokenSecret",
 			TWITTER_PROF_IMF = "profile_img",
 
-			MENSAGEM_ID = "idMensagem", MENSAGEM_TEXTO = "texto",
-			MENSAGEM_USER = "userName", MENSAGEM_DATE = "createdAt",
-			MENSAGEM_IMAGE_URL = "imgURL", MENSAGEM_TIPO = "tipoMensagem",
-			MENSAGEM_ID_USER = "id_from", MENSAGEM_ADD_CONTENT = "add_content",
+			MESSAGE_ID = "idMensagem", MESSAGE_TEXT = "msg_text",
+			MESSAGE_USER = "userName", MESSAGE_DATE = "createdAt",
+			MESSAGE_IMAGE_URL = "imgURL", MESSAGE_TYPE = "tipoMensagem",
+			MESSAGE_ID_USER = "id_from", MESSAGE_ADD_CONTENT = "add_content",
 
 			USER_SYS_ID = "id", USER_ID = "idUser", USER_NAME = "name",
 			USER_URL = "url_img", USER_ABOUT = "about", USER_NICK = "nick",
 			USER_NUM_FOLLOWERS = "followers", USER_NUM_FOLLOWING = "following",
-			USER_TYPE = "tipo_usuario",
+			USER_TYPE = "type_user",
 
-			COLUMNS_CONFIG_POS = "pos", COLUMNS_CONFIG_TYPE = "c_type",
+			COLUMNS_CONFIG_POS = "after", COLUMNS_CONFIG_TYPE = "c_type",
 			COLUMNS_CONFIG_PROPRITIES = "c_propreties",
 
 			DRAFTS_ID = "drafts_id", DRAFTS_TEXT = "drafts_text",
 					
-			LINHAS_ID="id_linhas", LINHAS_DESC="linhas_desc", LINHAS_HASH="linha_hash";
+			LINES_ID="id_lines", LINES_DESC="lines_desc", LINES_HASH = "hash_line";
 
 	private static DataBase singleton;
 	private final String[] CREATE_SQL = new String[] {
+			
+			"CREATE TABLE IF NOT EXISTS " + TB_REPORT + "("
+					+ REPORT_ID + " long primary key," + REPORT_LATITUDE + " double,"
+					+ REPORT_LONGITUDE + " double, " + REPORT_LINE_EXPECTED 
+					+ " text not null,"	+ REPORT_TYPE_REPORT + " int not null, " 
+					+ REPORT_HOUR + " long);",
 
 			"CREATE TABLE IF NOT EXISTS " + TB_COLUMNS_CONFIG + "("
 					+ COLUMNS_CONFIG_POS + " integer," + ""
@@ -71,13 +82,13 @@ public class DataBase {
 			"CREATE TABLE IF NOT EXISTS " + TB_DRAFTS + "(" + DRAFTS_ID
 					+ " text not null," + "" + DRAFTS_TEXT + " text not null);",
 
-			"CREATE TABLE IF NOT EXISTS " + TB_MENSAGEM + "(" + MENSAGEM_ID
-					+ " text," + "" + MENSAGEM_TEXTO + " text not null," + ""
-					+ MENSAGEM_USER + " text not null," + ""
-					+ MENSAGEM_IMAGE_URL + " text not null," + ""
-					+ MENSAGEM_TIPO + " int not null," + "" + MENSAGEM_DATE
-					+ " long not null," + "" + MENSAGEM_ID_USER
-					+ " long not null," + "" + MENSAGEM_ADD_CONTENT + " text);",
+			"CREATE TABLE IF NOT EXISTS " + TB_MESSAGE + "(" + MESSAGE_ID
+					+ " text," + "" + MESSAGE_TEXT + " text not null," + ""
+					+ MESSAGE_USER + " text not null," + ""
+					+ MESSAGE_IMAGE_URL + " text not null," + ""
+					+ MESSAGE_TYPE + " int not null," + "" + MESSAGE_DATE
+					+ " long not null," + "" + MESSAGE_ID_USER
+					+ " long not null," + "" + MESSAGE_ADD_CONTENT + " text);",
 
 			"CREATE TABLE IF NOT EXISTS " + TB_USER + "(" + USER_SYS_ID
 					+ " integer primary key autoincrement," + "" + USER_ID
@@ -87,13 +98,14 @@ public class DataBase {
 					+ "" + USER_NUM_FOLLOWING + " int," + "" + USER_TYPE
 					+ " int not null," + "" + USER_NICK + " text);",
 					
-			"CREATE TABLE IF NOT EXISTS " + TB_LINHAS + "(" + LINHAS_ID
+			"CREATE TABLE IF NOT EXISTS " + TB_LINES + "(" + LINES_ID
 					+ " text not null,"
-					+ LINHAS_DESC + " text not null, "
-					+ LINHAS_HASH + " text not null);",
+					+ LINES_DESC + " text not null, "
+					+ LINES_HASH + " text not null);",
 					
-			//inserindo as linhas j‡ precadastradas
-			"INSERT INTO "+ TB_LINHAS + " VALUES('342','Rodoviaria Circ. A', '342ssaba')"
+			//insert lines of bus for registration
+			"INSERT INTO "+ TB_LINES + " VALUES('342','Rodoviaria Circ. A', '342ssaba')"
+			//TODO ...
 	};
 	private SQLiteDatabase db;
 	private SQLiteHelper dbHelper;

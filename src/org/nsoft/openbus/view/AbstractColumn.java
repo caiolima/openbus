@@ -26,7 +26,7 @@ import org.nsoft.openbus.adapter.FeddAdapter;
 import org.nsoft.openbus.command.AbstractCommand;
 import org.nsoft.openbus.command.IMessageAction;
 import org.nsoft.openbus.model.CollumnConfig;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.bd.DataBase;
 import org.nsoft.openbus.model.bd.Facade;
 
@@ -145,7 +145,7 @@ public abstract class AbstractColumn {
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int position, long arg3) {
 					try {
-						Mensagem m = (Mensagem) adapter.getItem(position - 1);
+						Message m = (Message) adapter.getItem(position - 1);
 						IMessageAction action = m.getAction();
 						if (action != null)
 							action.execute(m, AbstractColumn.this.ctx);
@@ -165,7 +165,7 @@ public abstract class AbstractColumn {
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int position, long arg3) {
 					try {
-						Mensagem m = (Mensagem) adapter.getItem(position);
+						Message m = (Message) adapter.getItem(position);
 						IMessageAction action = m.getAction();
 						if (action != null)
 							action.execute(m, AbstractColumn.this.ctx);
@@ -214,7 +214,7 @@ public abstract class AbstractColumn {
 		 */
 	}
 
-	public void updateTwittes(final Vector<Mensagem> list, final boolean top) {
+	public void updateTwittes(final Vector<Message> list, final boolean top) {
 //		TimelineActivity.h.post(new Runnable() {
 //
 //			@Override
@@ -238,13 +238,13 @@ public abstract class AbstractColumn {
 		this.listView = listView;
 	}
 
-	public void addMensagens(Vector<Mensagem> tweets, boolean top) {
+	public void addMensagens(Vector<Message> tweets, boolean top) {
 
 		if (firstPut) {
 
 			for (int i = 0; i < tweets.size(); i++) {
 
-				Mensagem status = tweets.get(i);
+				Message status = tweets.get(i);
 
 				createAndAddMensage(status, 0);
 
@@ -276,7 +276,7 @@ public abstract class AbstractColumn {
 		firstPut = false;
 	}
 
-	public void createAndAddMensage(Mensagem status, int pos) {
+	public void createAndAddMensage(Message status, int pos) {
 
 		if (firstPut) {
 			adapter.addItem(status);

@@ -28,7 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.nsoft.openbus.R;
 import org.nsoft.openbus.assynctask.TwitterImageDownloadTask;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.bd.Facade;
 import org.nsoft.openbus.utils.ImageUtils;
 import org.nsoft.openbus.utils.MessageObserver;
@@ -53,8 +53,8 @@ import android.widget.TextView;
 
 public class FeddAdapter extends BaseAdapter {
 
-	private Vector<Mensagem> list = new Vector<Mensagem>();
-	private HashMap<String, Mensagem> hash = new HashMap<String, Mensagem>();
+	private Vector<Message> list = new Vector<Message>();
+	private HashMap<String, Message> hash = new HashMap<String, Message>();
 	private Context ctx;
 	private LayoutInflater mInflater;
 	private AbstractColumn column;
@@ -90,7 +90,7 @@ public class FeddAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		Log.w("dot.me", "Getting view at position " + position);
-		Mensagem m = (Mensagem) getItem(position);
+		Message m = (Message) getItem(position);
 		selection = position;
 		if (m != null) {
 			convertView = mInflater.inflate(R.layout.feed_row, null);
@@ -120,8 +120,8 @@ public class FeddAdapter extends BaseAdapter {
 			LinearLayout linearLayout = (LinearLayout) convertView
 					.findViewById(R.id.tweet_row_layout);
 
-			if (m.getTipo() == Mensagem.TIPO_NEWS_FEEDS
-					|| m.getTipo() == Mensagem.TIPO_FACEBOOK_GROUP) {
+			if (m.getTipo() == Message.TIPO_NEWS_FEEDS
+					|| m.getTipo() == Message.TIPO_FACEBOOK_GROUP) {
 				holder.createAndFillFacebookMessage(convertView, m);
 				/*
 				 * linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +153,9 @@ public class FeddAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public void addItem(int position, Mensagem o) {
-		if (o instanceof Mensagem) {
-			Mensagem m = o;
+	public void addItem(int position, Message o) {
+		if (o instanceof Message) {
+			Message m = o;
 			if (messageWasAdded(m))
 				return;
 
@@ -166,7 +166,7 @@ public class FeddAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	public void addItem(Mensagem o) {
+	public void addItem(Message o) {
 
 		hash.put(o.getIdMensagem() + "_" + o.getTipo(), o);
 		list.add(o);
@@ -174,8 +174,8 @@ public class FeddAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	private boolean messageWasAdded(Mensagem m) {
-		for (Mensagem message : list) {
+	private boolean messageWasAdded(Message m) {
+		for (Message message : list) {
 			if (message.getIdMensagem().equals(m.getIdMensagem())
 					&& message.getTipo() == m.getTipo()) {
 				return true;
@@ -209,9 +209,9 @@ public class FeddAdapter extends BaseAdapter {
 		public LinearLayout lt_img_preview, lt_like, lt_comments, lt_caption;
 		private Handler h = new Handler();
 
-		// MŽtodo em que os campos da view s‹o preenchidos com o conteudo da
+		// Mï¿½todo em que os campos da view sï¿½o preenchidos com o conteudo da
 		// mensagem
-		public void preencheLayout(Mensagem m) {
+		public void preencheLayout(Message m) {
 			String mensagem = m.getMensagem();
 			if (mensagem.length() > 150) {
 				mensagem = mensagem.substring(0, 140) + "...";
@@ -233,7 +233,7 @@ public class FeddAdapter extends BaseAdapter {
 			txt_texto.setText(mensagem);
 		}
 
-		public void createAndFillFacebookMessage(View convertView, Mensagem m) {
+		public void createAndFillFacebookMessage(View convertView, Message m) {
 			PictureInfo pInfo = m.getPictureUrl();
 			if (pInfo != null) {
 				img_preview = (ImageView) convertView
@@ -376,7 +376,7 @@ public class FeddAdapter extends BaseAdapter {
 	public void deleteMensagem(String id, int type) {
 
 		try {
-			Mensagem m = hash.get(id + "_" + type);
+			Message m = hash.get(id + "_" + type);
 			try {
 				list.remove(m);
 

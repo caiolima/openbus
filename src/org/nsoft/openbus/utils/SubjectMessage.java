@@ -21,7 +21,7 @@ package org.nsoft.openbus.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 
 
 public class SubjectMessage {
@@ -40,7 +40,7 @@ public class SubjectMessage {
 		return observers;
 	}
 	
-	public void notifyMessageAddedObservers(Mensagem m){
+	public void notifyMessageAddedObservers(Message m){
 		for(MessageObserver mObserver:observers){
 			mObserver.notifyMessageAdded(m);
 		}

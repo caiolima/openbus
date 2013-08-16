@@ -3,7 +3,7 @@ package org.nsoft.openbus.control;
 import java.util.Vector;
 
 import org.nsoft.openbus.R;
-import org.nsoft.openbus.model.LinhaOnibus;
+import org.nsoft.openbus.model.LineBus;
 import org.nsoft.openbus.model.bd.Facade;
 
 import android.app.Activity;
@@ -22,7 +22,7 @@ public class SearchLineActivity extends Activity{
 	private ImageButton bt_search;
 	private EditText txt_search;
 	private ListView lst_lines;
-	private ArrayAdapter<LinhaOnibus> adapter;
+	private ArrayAdapter<LineBus> adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class SearchLineActivity extends Activity{
 	private void initControl() {
 		
 		Facade facade = Facade.getInstance(this);
-		Vector<LinhaOnibus> allLines = facade.getAllLinhas();
+		Vector<LineBus> allLines = facade.getAllLinhas();
 		
-		adapter = new ArrayAdapter<LinhaOnibus>(this, R.layout.trend_item,
+		adapter = new ArrayAdapter<LineBus>(this, R.layout.trend_item,
 				R.id.txt_value, allLines);
 		
 		lst_lines.setAdapter(adapter);
@@ -51,7 +51,7 @@ public class SearchLineActivity extends Activity{
 					long arg3) {
 				
 				
-				LinhaOnibus aLine = adapter.getItem(aPosition);
+				LineBus aLine = adapter.getItem(aPosition);
 				Bundle params=new Bundle();
 				
 				params.putString("hash_code", aLine.getHash());

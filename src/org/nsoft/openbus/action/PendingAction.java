@@ -19,7 +19,7 @@
 package org.nsoft.openbus.action;
 
 import org.nsoft.openbus.command.IMessageAction;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 
 import android.content.Context;
 
@@ -27,9 +27,9 @@ import android.content.Context;
 public class PendingAction {
 
 	private IMessageAction action;
-	private Mensagem m;
+	private Message m;
 	
-	public PendingAction(IMessageAction action, Mensagem m){
+	public PendingAction(IMessageAction action, Message m){
 		this.m=m;
 		this.action=action;
 		

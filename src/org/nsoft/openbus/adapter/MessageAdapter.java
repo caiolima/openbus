@@ -23,7 +23,7 @@ import java.util.Vector;
 
 import org.nsoft.openbus.R;
 import org.nsoft.openbus.assynctask.TwitterImageDownloadTask;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.bd.Facade;
 import org.nsoft.openbus.utils.ImageUtils;
 import org.nsoft.openbus.utils.PictureInfo;
@@ -50,7 +50,7 @@ public class MessageAdapter extends BaseAdapter {
 	public static final int TYPE_SEPARATOR = 1;
 	private static final int TYPE_MAX_COUNT = TYPE_SEPARATOR + 1;
 
-	private Vector<Mensagem> list = new Vector<Mensagem>();
+	private Vector<Message> list = new Vector<Message>();
 	private Vector<Integer> initialPositionExecuted = new Vector<Integer>();
 	// private TreeSet<Integer> separetorList = new TreeSet<Integer>();
 	private LayoutInflater mInflater;
@@ -58,7 +58,7 @@ public class MessageAdapter extends BaseAdapter {
 	private Separator currentSeparator;
 
 	public MessageAdapter(Context ctx) {
-		// opera‹o necess‡ria para usar o Inflater
+		// operaï¿½ï¿½o necessï¿½ria para usar o Inflater
 		this.ctx = ctx;
 		mInflater = (LayoutInflater) ctx
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,10 +70,10 @@ public class MessageAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Mensagem getItem(int position) {
+	public Message getItem(int position) {
 		// TODO Auto-generated method stub
 		try {
-			Mensagem mensagem = list.get(position);
+			Message mensagem = list.get(position);
 			return mensagem;
 		} catch (ClassCastException e) {
 			return null;
@@ -94,7 +94,7 @@ public class MessageAdapter extends BaseAdapter {
 		ViewHolder holder = null;
 		Log.w("dot.me", "Getting view at position " + position);
 
-		final Mensagem m = getItem(position);
+		final Message m = getItem(position);
 		int type = getItemViewType(position);
 
 		if (type == TYPE_ITEM) {
@@ -135,9 +135,9 @@ public class MessageAdapter extends BaseAdapter {
 
 	}
 
-	public void addItem(int position, Mensagem o) {
-		if (o instanceof Mensagem) {
-			Mensagem m = o;
+	public void addItem(int position, Message o) {
+		if (o instanceof Message) {
+			Message m = o;
 			if (list.contains(m))
 				return;
 
@@ -146,7 +146,7 @@ public class MessageAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	public void addItem(Mensagem o) {
+	public void addItem(Message o) {
 		list.add(o);
 		notifyDataSetChanged();
 	}
@@ -166,7 +166,7 @@ public class MessageAdapter extends BaseAdapter {
 	@Override
 	public int getItemViewType(int position) {
 
-		return getItem(position) instanceof Mensagem ? TYPE_ITEM
+		return getItem(position) instanceof Message ? TYPE_ITEM
 				: TYPE_SEPARATOR;
 	}
 
@@ -188,9 +188,9 @@ public class MessageAdapter extends BaseAdapter {
 		public LinearLayout lt_img_preview, lt_like, lt_comments;
 		private Handler h = new Handler();
 
-		// MŽtodo em que os campos da view s‹o preenchidos com o conteudo da
+		// Mï¿½todo em que os campos da view sï¿½o preenchidos com o conteudo da
 		// mensagem
-		public void preencheLayout(Mensagem m) {
+		public void preencheLayout(Message m) {
 			String mensagem = m.getMensagem();
 			if (mensagem.length() > 150) {
 				mensagem = mensagem.substring(0, 140) + "...";
@@ -212,7 +212,7 @@ public class MessageAdapter extends BaseAdapter {
 			txt_texto.setText(mensagem);
 		}
 
-		public void createAndFillFacebookMessage(View convertView, Mensagem m) {
+		public void createAndFillFacebookMessage(View convertView, Message m) {
 			PictureInfo pInfo = m.getPictureUrl();
 			if (pInfo != null) {
 				img_preview = (ImageView) convertView

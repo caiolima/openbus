@@ -20,7 +20,7 @@ package org.nsoft.openbus.utils;
 
 import java.util.Vector;
 
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 
 
 import android.os.Parcel;
@@ -29,9 +29,9 @@ import android.os.Parcelable;
 public class MensageList implements Parcelable{
 	private int mData;
 	//private int mData;
-	private Vector<Mensagem> mensagemList=new Vector<Mensagem>();
+	private Vector<Message> mensagemList=new Vector<Message>();
 	
-	public MensageList(Vector<Mensagem> list){
+	public MensageList(Vector<Message> list){
     	mensagemList=list;
     }
 	
@@ -67,11 +67,11 @@ public class MensageList implements Parcelable{
 
 
 
-	public Vector<Mensagem> getMensagemList() {
+	public Vector<Message> getMensagemList() {
 		return mensagemList;
 	}
 
-	public void setMensagemList(Vector<Mensagem> mensagemList) {
+	public void setMensagemList(Vector<Message> mensagemList) {
 		this.mensagemList = mensagemList;
 	}
 

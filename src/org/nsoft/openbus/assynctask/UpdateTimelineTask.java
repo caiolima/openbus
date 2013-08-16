@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nsoft.openbus.adapter.FeddAdapter;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.bd.Facade;
 import org.nsoft.openbus.utils.Constants;
 import org.nsoft.openbus.utils.TwitterUtils;
@@ -44,8 +44,8 @@ public class UpdateTimelineTask extends AsyncTask<Void, Void, Void> {
 	private UpdateParams uParams;
 	private PullToRefreshListView listView;
 	private AbstractColumn column;
-	private List<Mensagem> messages = new ArrayList<Mensagem>();
-	private List<Mensagem> last = new ArrayList<Mensagem>();
+	private List<Message> messages = new ArrayList<Message>();
+	private List<Message> last = new ArrayList<Message>();
 
 	public UpdateTimelineTask(Context ctx, UpdateParams params) {
 		this.ctx = ctx;
@@ -63,7 +63,7 @@ public class UpdateTimelineTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			last = Facade.getInstance(ctx).getMensagemOf(Mensagem.TIPO_STATUS);
+			last = Facade.getInstance(ctx).getMensagemOf(Message.TIPO_STATUS);
 			AccessToken accessToken = uParams.getToken();
 			ResponseList<twitter4j.Status> list;
 
@@ -77,7 +77,7 @@ public class UpdateTimelineTask extends AsyncTask<Void, Void, Void> {
 			Paging page = new Paging(n_page, qtd_feeds);
 			list = TwitterUtils.getTwitter(accessToken).getHomeTimeline(page);
 
-			ResponseUpdate response = TwitterUtils.updateTweets(ctx,list,Mensagem.TIPO_STATUS);
+			ResponseUpdate response = TwitterUtils.updateTweets(ctx,list,Message.TIPO_STATUS);
 			messages = response.mensagens;
 			/*
 			 * Mensagem lastMessage = response.lastMessage;
@@ -140,14 +140,14 @@ public class UpdateTimelineTask extends AsyncTask<Void, Void, Void> {
 
 			if (uParams.getPage() == 1 && !messages.isEmpty()) {
 				adapter.clear();
-				for (Mensagem m : last) {
+				for (Message m : last) {
 					if (!messages.contains(m))
 						Facade.getInstance(ctx).deleteMensagem(
 								m.getIdMensagem(), m.getTipo());
 				}
 			}
 
-			for (Mensagem m : messages) {
+			for (Message m : messages) {
 				adapter.addItem(m);
 			}
 

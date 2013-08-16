@@ -32,7 +32,7 @@ import org.nsoft.openbus.command.OpenTwitterWriter;
 import org.nsoft.openbus.interfaces.IGetUpdateAction;
 import org.nsoft.openbus.model.Account;
 import org.nsoft.openbus.model.CollumnConfig;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.TwitterAccount;
 import org.nsoft.openbus.model.bd.Facade;
 import org.nsoft.openbus.utils.Constants;
@@ -53,7 +53,7 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 	private Context ctx;
 	private Handler h = new Handler();
 	private int currentpage;
-	private Vector<Mensagem> mensagensAdded = new Vector<Mensagem>();
+	private Vector<Message> mensagensAdded = new Vector<Message>();
 	private boolean flagNextPage = false;
 
 	public SearchColumn(Context ctx, String search) {
@@ -68,9 +68,9 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 
 	@Override
 	public void onGetUpdate(AccessToken token) {
-		final List<Mensagem> last = new ArrayList<Mensagem>();
+		final List<Message> last = new ArrayList<Message>();
 
-		for (Mensagem m : facade.getMensagemOf(Mensagem.TIPO_TWEET_SEARCH)) {
+		for (Message m : facade.getMensagemOf(Message.TIPO_TWEET_SEARCH)) {
 			try {
 				Vector<String> parts = new Vector<String>(Arrays.asList(m
 						.getMensagem().toLowerCase().split(" ")));
@@ -195,7 +195,7 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 			if (adapter.getItemViewType(i) != MessageAdapter.TYPE_SEPARATOR)
 				continue;
 
-			Mensagem m = (Mensagem) adapter.getItem(i);
+			Message m = (Message) adapter.getItem(i);
 			facade.deleteMensagem(m.getIdMensagem(), m.getTipo());
 
 		}
@@ -227,11 +227,11 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 	@Override
 	public void init() {
 
-		final Vector<Mensagem> toAdd = new Vector<Mensagem>();
+		final Vector<Message> toAdd = new Vector<Message>();
 		Facade facade = Facade.getInstance(ctx);
-		Vector<Mensagem> mensagens = facade
-				.getMensagemOf(Mensagem.TIPO_TWEET_SEARCH);
-		for (final Mensagem m : mensagens) {
+		Vector<Message> mensagens = facade
+				.getMensagemOf(Message.TIPO_TWEET_SEARCH);
+		for (final Message m : mensagens) {
 			JSONObject adds = m.getAddtions();
 			try {
 				String searchTag = adds.getString("search_tag");
@@ -247,7 +247,7 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 
 				@Override
 				public void run() {
-					for (Mensagem m : toAdd)
+					for (Message m : toAdd)
 						adapter.addItem(m);
 //					notifyInitFinished();
 				}
@@ -257,7 +257,7 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 		if (toAdd.isEmpty())
 			return;
 
-		Mensagem m = toAdd.firstElement();
+		Message m = toAdd.firstElement();
 		if (m != null) {
 			if (System.currentTimeMillis() - m.getData().getTime() > Constants.QTD_MINUTES) {
 				currentpage = 0;
@@ -274,9 +274,9 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 	private class GetSearchTweetsTask extends AsyncTask<Void, Void, Void> {
 
 		private AccessToken token;
-		private Vector<Mensagem> mensagens = new Vector<Mensagem>();
-		private Vector<Mensagem> cachedMessages = new Vector<Mensagem>();
-		private List<Mensagem> last;
+		private Vector<Message> mensagens = new Vector<Message>();
+		private Vector<Message> cachedMessages = new Vector<Message>();
+		private List<Message> last;
 
 		public GetSearchTweetsTask(AccessToken token) {
 			this.token = token;
@@ -285,9 +285,9 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 		@Override
 		protected Void doInBackground(Void... params) {
 
-			last = new ArrayList<Mensagem>();
+			last = new ArrayList<Message>();
 
-			for (Mensagem m : facade.getMensagemOf(Mensagem.TIPO_TWEET_SEARCH)) {
+			for (Message m : facade.getMensagemOf(Message.TIPO_TWEET_SEARCH)) {
 				try {
 					Vector<String> parts = new Vector<String>(Arrays.asList(m
 							.getMensagem().toLowerCase().split(" ")));
@@ -341,13 +341,13 @@ public class SearchColumn extends AbstractColumn implements IGetUpdateAction {
 				((PullToRefreshListView) listView).onRefreshComplete();
 				if (!mensagens.isEmpty()) {
 					adapter.clear();
-					for (Mensagem m : last)
+					for (Message m : last)
 						facade.deleteMensagem(m.getIdMensagem(), m.getTipo());
 
 				}
 			}
 
-			for (Mensagem m : mensagens) {
+			for (Message m : mensagens) {
 				JSONObject adds = m.getAddtions();
 				if (adds != null) {
 					try {

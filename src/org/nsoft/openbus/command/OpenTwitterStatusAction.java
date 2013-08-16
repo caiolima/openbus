@@ -19,7 +19,7 @@
 package org.nsoft.openbus.command;
 
 import org.json.JSONException;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +40,7 @@ public class OpenTwitterStatusAction implements IMessageAction {
 	private OpenTwitterStatusAction(){}
 	
 	@Override
-	public void execute(Mensagem m, Context ctx) {
+	public void execute(Message m, Context ctx) {
 		
 
 		try {
@@ -53,7 +53,7 @@ public class OpenTwitterStatusAction implements IMessageAction {
 	}
 
 	@Override
-	public Intent createIntent(Mensagem m, Context ctx) throws JSONException {
+	public Intent createIntent(Message m, Context ctx) throws JSONException {
 
 //		Intent intent = new Intent(ctx,
 //				MessageInfoActivity.class);

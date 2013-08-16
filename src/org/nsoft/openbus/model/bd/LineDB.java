@@ -14,20 +14,40 @@
 *along with OpenBus. If not, see <http://www.gnu.org/licenses/>.
 *
 * Author: Caio Lima
-* Date: 30 - 06 - 2013
+* Date: 02 - 07 - 2013
 */
-package org.nsoft.openbus.command;
+package org.nsoft.openbus.model.bd;
 
-import org.json.JSONException;
-import org.nsoft.openbus.model.Message;
+import java.util.Vector;
 
+import org.nsoft.openbus.model.LineBus;
 import android.content.Context;
-import android.content.Intent;
+import android.database.Cursor;
 
+public class LineDB extends Dao{
 
-public interface IMessageAction {
-
-	public void execute(Message m, Context ctx);
-	public Intent createIntent(Message m, Context ctx) throws JSONException;
+	protected LineDB(Context ctx) {
+		super(ctx);
+	}
 	
+	protected Vector<LineBus> getAll(){
+		Cursor c=db.getDB().query(DataBase.TB_LINES, null, null, null, null, null, null);
+		Vector<LineBus> all=new Vector<LineBus>();
+		
+		for(int i=0;i<c.getCount();i++){
+			c.moveToPosition(i);
+			
+			LineBus linha=new LineBus();
+			
+			linha.setIdLinha(c.getInt(0));
+			linha.setDescicao(c.getString(1));
+			linha.setHash(c.getString(2));
+			
+			all.add(linha);
+		}
+		c.close();
+		return all;
+	}
+	
+
 }

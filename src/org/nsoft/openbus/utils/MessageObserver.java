@@ -18,11 +18,11 @@
 */
 package org.nsoft.openbus.utils;
 
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 
 public interface MessageObserver {
 
-	public void notifyMessageAdded(Mensagem m);
+	public void notifyMessageAdded(Message m);
 	public void notifyMessageRemoved(String id,int type);
 	
 }

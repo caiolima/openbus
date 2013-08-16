@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nsoft.openbus.interfaces.IGetUpdateAction;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.bd.Facade;
 import org.nsoft.openbus.view.AbstractColumn;
 import org.nsoft.openbus.view.SearchColumn;
@@ -58,7 +58,7 @@ public class UpdateAction extends AsyncTask<IGetUpdateAction, Void, Void>{
 	@Override
 	protected Void doInBackground(IGetUpdateAction... params) {
 		Facade facade=Facade.getInstance(ctx);
-		int num_status=facade.getCountMensagem(Mensagem.TIPO_TWEET_SEARCH);
+		int num_status=facade.getCountMensagem(Message.TIPO_TWEET_SEARCH);
 		if(num_status>40){
 			SearchColumn.cleanAll();
 			//adapter.removeAll();

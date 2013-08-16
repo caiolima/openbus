@@ -25,7 +25,7 @@ import java.util.TimeZone;
 import java.util.Vector;
 
 import org.nsoft.openbus.R;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.User;
 import org.nsoft.openbus.model.bd.Facade;
 
@@ -206,10 +206,10 @@ public class TwitterUtils {
 	public static ResponseUpdate updateTweets(Context ctx,
 			ResponseList<twitter4j.Status> list, int type) {
 		// ImageUtils.loadImages(list);
-		Mensagem lastMessage = null;
-		Vector<Mensagem> mensagens = new Vector<Mensagem>();
+		Message lastMessage = null;
+		Vector<Message> mensagens = new Vector<Message>();
 		for (twitter4j.Status status : list) {
-			Mensagem m = Mensagem.creteFromTwitterStatus(status);
+			Message m = Message.creteFromTwitterStatus(status);
 			Facade facade = Facade.getInstance(ctx);
 			User u = User.createFromTwitterUser(status.getUser());
 			facade.insert(u);
@@ -232,8 +232,8 @@ public class TwitterUtils {
 	}
 
 	public static class ResponseUpdate {
-		public Vector<Mensagem> mensagens;
-		public Mensagem lastMessage;
+		public Vector<Message> mensagens;
+		public Message lastMessage;
 	}
 
 	public static void logoutTwitter() {

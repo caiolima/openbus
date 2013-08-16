@@ -25,8 +25,8 @@ import java.util.Vector;
 import org.nsoft.openbus.model.Account;
 import org.nsoft.openbus.model.CollumnConfig;
 import org.nsoft.openbus.model.Draft;
-import org.nsoft.openbus.model.LinhaOnibus;
-import org.nsoft.openbus.model.Mensagem;
+import org.nsoft.openbus.model.LineBus;
+import org.nsoft.openbus.model.Message;
 import org.nsoft.openbus.model.TwitterAccount;
 import org.nsoft.openbus.model.User;
 import org.nsoft.openbus.utils.TwitterUtils;
@@ -37,12 +37,12 @@ import android.content.Context;
 public class Facade {
 
 	private static Facade singleton;
-	private TwitterBD twitterBD;
-	private MensagemBD mensagemBD;
+	private TwitterDB twitterBD;
+	private MessageDB mensagemBD;
 	private CollumnConfigDao configDao;
 	private UserDB userBD;
-	private DraftBD draftBD;
-	private LinhasBD linhasBD;
+	private DraftDB draftBD;
+	private LineDB linhasBD;
 
 	public static Facade getInstance(Context ctx) {
 		if (singleton == null)
@@ -53,12 +53,12 @@ public class Facade {
 
 	private Facade(Context ctx) {
 
-		twitterBD = new TwitterBD(ctx);
-		mensagemBD = new MensagemBD(ctx);
+		twitterBD = new TwitterDB(ctx);
+		mensagemBD = new MessageDB(ctx);
 		configDao = new CollumnConfigDao(ctx);
 		userBD = new UserDB(ctx);
-		draftBD = new DraftBD(ctx);
-		linhasBD = new LinhasBD(ctx); 
+		draftBD = new DraftDB(ctx);
+		linhasBD = new LineDB(ctx); 
 
 	}
 
@@ -73,8 +73,8 @@ public class Facade {
 
 	public void logoutTwitter() {
 		twitterBD.delete();
-		mensagemBD.deleteAll(Mensagem.TIPO_STATUS);
-		mensagemBD.deleteAll(Mensagem.TIPO_TWEET_SEARCH);
+		mensagemBD.deleteAll(Message.TIPO_STATUS);
+		mensagemBD.deleteAll(Message.TIPO_TWEET_SEARCH);
 		TwitterUtils.logoutTwitter();
 	}
 
@@ -87,7 +87,7 @@ public class Facade {
 
 	
 
-	public boolean insert(final Mensagem m) {
+	public boolean insert(final Message m) {
 		if (mensagemBD.existsStatus(m.getIdMensagem(), m.getTipo()))
 			return false;
 
@@ -96,7 +96,7 @@ public class Facade {
 		return true;
 	}
 
-	public Vector<Mensagem> getAllMensagens() {
+	public Vector<Message> getAllMensagens() {
 		try {
 			return mensagemBD.getAllMensagens();
 		} catch (MalformedURLException e) {
@@ -124,7 +124,7 @@ public class Facade {
 		return mensagemBD.count(type);
 	}
 
-	public Vector<Mensagem> getMensagemOf(int type) {
+	public Vector<Message> getMensagemOf(int type) {
 		return mensagemBD.getMensagemOf(type);
 	}
 
@@ -132,7 +132,7 @@ public class Facade {
 		mensagemBD.delete(id, type);
 	}
 
-	public Mensagem getOneMessage(String id, int type) {
+	public Message getOneMessage(String id, int type) {
 		try {
 			return mensagemBD.getOne(id, type);
 		} catch (Exception e) {
@@ -172,13 +172,13 @@ public class Facade {
 
 	
 
-	public void update(Mensagem m) {
+	public void update(Message m) {
 		mensagemBD.update(m);
 	}
 
 
 
-	public Vector<Mensagem> getMensagemOfLikeId(int type, String idLike) {
+	public Vector<Message> getMensagemOfLikeId(int type, String idLike) {
 		return mensagemBD.getMensagemOfLikeId(type, idLike);
 	}
 
@@ -236,7 +236,7 @@ public class Facade {
 		return configDao.existsCollumnType(type);
 	}
 
-	public Vector<LinhaOnibus> getAllLinhas(){
+	public Vector<LineBus> getAllLinhas(){
 		return linhasBD.getAll();
 	}
 	

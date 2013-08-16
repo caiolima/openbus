@@ -192,4 +192,5 @@
 	<string name="tuto_intro">The dotme has a feature to filter feeds. They are the Black List and the Labels.</string>
 	<string name="tuto_labels">With Labels is possible to filter the feeds using words configured by your likes. Each Label has a collumn where you can see all feeds filtered. To configure a Label, go to Manage Label window and click on add. After it, write word by word in each line. If you put words in a single line, the dotme will consider them a statement.</string>
 	<string name="tuto_black_list">The Black List is a filter to ignore feeds. To configure this list, add words that you like, then dotme will remove all feeds with these words. If you write a word with the "+"(like a+b), dotme only will ignore the feed that contains both words, "a" and "b"</string>
+	<string name="top_map">Map</string>
 </resources>

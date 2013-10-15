@@ -85,7 +85,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAs-2U6DNrJ3sqGtQdz5AdNpBPuTvDszFY" />
 
-        <activity android:name=".control.MapActivity" >
+        <activity 
+            android:name=".control.MapActivity" 
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         </activity>
     </application>
 
